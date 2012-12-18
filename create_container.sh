@@ -1,5 +1,13 @@
 #!/bin/bash
+##
 # Create a LUKS crypto container with filesystem inside
+#
+# Creating the image file (step 1) could also be done
+# on the server to prevent uploading large container files
+# which might be empty. However, calling cryptsetup has
+# to be performed offline.
+##
+
 source helper.sh
 
 ######
