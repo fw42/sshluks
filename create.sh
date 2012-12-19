@@ -1,49 +1,32 @@
 #!/bin/bash
-##
 # Create a LUKS crypto container with filesystem inside
-#
-# Creating the image file (step 1) could also be done
-# on the server to prevent uploading large container files
-# which might be empty. However, calling cryptsetup has
-# to be performed offline.
-##
 
-source helper.sh
+DIR=$(dirname $0)
+source $DIR/helper.sh
+source $DIR/config.sh
 
-######
-
-# Path of device mapping which will be used by cryptsetup
-MAPPER="/dev/mapper"
-CRYPTNAME="container"
-
-# Options for cryptsetup luksFormat
-OPTIONS="-c aes-cbc-essiv:sha256"
-
-# Command for creating the filesystem inside the container
-MKFS="mkfs.ext4 -m 0"
-
-######
-
-if [ $# -ne 2 ]
+if [ $# -ne 4 ]
 then
-	echo "Usage: $0 <container> <size in MB>"
+	echo "Usage: $0 <container> <dd prefix> <dd container> <size>"
 	exit
 fi
 
 checkroot
 
 CONTAINER="$1"
-SIZE="$2"
+DD_PREFIX="$2"
+DD_CONTAINER="$3"
+SIZE="$4"
 LOOP=$(losetup -f)
 
 msg_status "Creating image file $CONTAINER of size $SIZE MiB..."
-dd if=/dev/zero of=$CONTAINER bs=1M count=$SIZE || die
+$DD_PREFIX dd if=/dev/urandom of=$DD_CONTAINER bs=1M count=$SIZE || die
 
 msg_status "Mounting image file $CONTAINER as $LOOP..."
 losetup $LOOP $CONTAINER || die
 
-msg_status "Creating crypto container inside $CONTAINER ($OPTIONS)..."
-cryptsetup $OPTIONS luksFormat $LOOP || die
+msg_status "Creating crypto container inside $CONTAINER ($LUKSFORMAT)..."
+cryptsetup $LUKSFORMAT $LOOP || die
 
 msg_status "Mounting crypto container as $CRYPTNAME..."
 cryptsetup luksOpen $LOOP $CRYPTNAME || die
