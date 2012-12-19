@@ -52,3 +52,10 @@ More advanced stuff
 
 * Shrinking container file
  * Does not work yet, but should be possible :-(
+
+Bugs
+----
+
+Error handling is not good. If you make a mistake and some script fails at some point,
+there is not clean up. Everything just dies. Check `losetup -a` for active device mappings
+and `/dev/mapper/` for cryptsetup mappings.
