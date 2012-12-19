@@ -9,8 +9,8 @@ Tools used: cryptsetup/LUKS for encryption, losetup for device mapping, sshfs fo
 Important: `mount_via_ssh.sh` implements locking, such that no two clients will ever access the container
 file at the same time. Ignoring those locks can result in serious damage to the filesystem inside the container!
 
-Getting started
----------------
+Getting started: Creating the container
+---------------------------------------
 
 * Have a look at config.sh
 
@@ -29,6 +29,9 @@ Getting started
 * Unmount sshfs
 
     $ sudo umount ~/mnt/server
+
+Getting started: Using the container
+------------------------------------
 
 * Mount the filesystem inside the container for use
 
