@@ -41,7 +41,7 @@ Getting started: Using the container
 
 * Unmount the filesystem when you are done
 
-    $ sudo ~/sshluks/umount.sh ~/mnt/server_container
+    $ sudo ./umount.sh ~/mnt/server_container
 
 More advanced stuff
 -------------------
