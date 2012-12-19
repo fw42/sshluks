@@ -2,7 +2,7 @@
 
 # Path of device mapping which will be used by cryptsetup
 MAPPER="/dev/mapper"
-CRYPTNAME="container"
+CRYPTNAME="sshluks_container"
 
 # Options for cryptsetup luksFormat
 LUKSFORMAT="-c aes-cbc-essiv:sha256 luksFormat"
