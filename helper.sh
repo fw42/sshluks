@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 msg_status(){
 	echo -e ">> \e[0;32;49m$*\e[0m"
 }

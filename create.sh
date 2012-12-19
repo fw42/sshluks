@@ -20,7 +20,7 @@ CRYPTNAME="container"
 OPTIONS="-c aes-cbc-essiv:sha256"
 
 # Command for creating the filesystem inside the container
-MKFS="mkfs.ext4"
+MKFS="mkfs.ext4 -m 0"
 
 ######
 
