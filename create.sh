@@ -19,19 +19,19 @@ DD_CONTAINER="$3"
 SIZE="$4"
 LOOP=$(losetup -f)
 
-msg_status "Creating image file $CONTAINER of size $SIZE MiB..."
+msg_status "Creating container file \"$CONTAINER\" of size $SIZE MiB..."
 $DD_PREFIX dd if=/dev/urandom of=$DD_CONTAINER bs=1M count=$SIZE || die
 
-msg_status "Mounting image file $CONTAINER as $LOOP..."
+msg_status "Mounting image file \"$CONTAINER\" as \"$LOOP\"..."
 losetup $LOOP $CONTAINER || die
 
-msg_status "Creating crypto container inside $CONTAINER ($LUKSFORMAT)..."
+msg_status "Creating crypto container inside \"$CONTAINER\" ($LUKSFORMAT)..."
 cryptsetup $LUKSFORMAT $LOOP || die
 
-msg_status "Mounting crypto container as $CRYPTNAME..."
+msg_status "Mounting crypto container as \"$CRYPTNAME\"..."
 cryptsetup luksOpen $LOOP $CRYPTNAME || die
 
-msg_status "Creating filesystem ($MKFS) in $MAPPER/$CRYPTNAME..."
+msg_status "Creating filesystem ($MKFS) in \"$MAPPER/$CRYPTNAME\"..."
 mkfs.ext4 $MAPPER/$CRYPTNAME || die
 
 msg_status "Closing crypto container..."
