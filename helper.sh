@@ -23,3 +23,7 @@ checkroot(){
 		die "Need root privileges"
 	fi
 }
+
+runuser(){
+	su $LOCALUSER -c "$*"
+}

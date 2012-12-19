@@ -5,7 +5,7 @@ DIR=$(dirname $0)
 source $DIR/helper.sh
 source $DIR/config.sh
 
-if [ $# -ne 2 ]
+if [ $# -ne 4 ]
 then
 	echo "Usage: $0 <container> <dd prefix> <dd container> <additional size in MB>"
 	exit
@@ -20,7 +20,7 @@ SIZE="$4"
 LOOP=$(losetup -f)
 
 msg_status "Enlarging image file \"$DD_CONTAINER\" by $SIZE MiB... (using $DD_PREFIX)"
-$DD_PREFIX dd if=/dev/urandom bs=1M count=$SIZE >> $DD_CONTAINER || die
+runuser $DD_PREFIX dd if=$FILLDEV bs=1M count=$SIZE of=$DD_CONTAINER oflag=append conv=notrunc || die
 
 msg_status "Mounting image file \"$CONTAINER\" as \"$LOOP\"..."
 losetup $LOOP $CONTAINER || die

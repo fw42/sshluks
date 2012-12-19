@@ -20,7 +20,7 @@ SIZE="$4"
 LOOP=$(losetup -f)
 
 msg_status "Creating container file \"$CONTAINER\" of size $SIZE MiB..."
-$DD_PREFIX dd if=/dev/urandom of=$DD_CONTAINER bs=1M count=$SIZE || die
+runuser $DD_PREFIX dd if=$FILLDEV of=$DD_CONTAINER bs=1M count=$SIZE || die
 
 msg_status "Mounting image file \"$CONTAINER\" as \"$LOOP\"..."
 losetup $LOOP $CONTAINER || die

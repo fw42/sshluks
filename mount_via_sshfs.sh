@@ -20,7 +20,7 @@ LOOP=$(losetup -f)
 
 CONTAINER_DIR=$(dirname $CONTAINER)
 msg_status "Mounting \"$CONTAINER_DIR\" on \"$MOUNT_SSHFS\"..."
-runsshfs $CONTAINER_DIR $MOUNT_SSHFS || die
+runuser $SSHFS $CONTAINER_DIR $MOUNT_SSHFS || die
 
 msg_status "Checking for filesystem lock..."
 if [ -e "$MOUNT_SSHFS/lock" ]

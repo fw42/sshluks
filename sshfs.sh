@@ -17,7 +17,7 @@ REMOTE="$1"
 MOUNT_SSHFS="$2"
 
 msg_status "Mounting \"$REMOTE\" on \"$MOUNT_SSHFS\"..."
-runsshfs $REMOTE $MOUNT_SSHFS || die
+runuser $SSHFS $REMOTE $MOUNT_SSHFS || die
 
 msg_status "Done."
 df -h $MOUNT_SSHFS

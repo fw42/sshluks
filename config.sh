@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Name of local system user (used for sshfs UID stuff and ssh commands)
+LOCALUSER="flo"
+
 # Path of device mapping which will be used by cryptsetup
 MAPPER="/dev/mapper"
 CRYPTNAME="sshluks_container"
@@ -14,7 +17,7 @@ FSCK="fsck.ext4 -f"
 MOUNT="mount -t ext4 -o noatime,nodiratime,noacl,commit=1,errors=remount-ro"
 
 # SSHFS options
-LOCALUSER="flo"
-runsshfs(){
-	su $LOCALUSER -c "sshfs -o uid=$(id -u $LOCALUSER),reconnect,allow_root $*"
-}
+SSHFS="sshfs -o uid=$(id -u $LOCALUSER),reconnect,allow_root"
+
+# Device used for creating containers. Use /dev/urandom if you are paranoid (and patient).
+FILLDEV=/dev/zero
