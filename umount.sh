@@ -25,7 +25,7 @@ cryptsetup luksClose $CRYPTNAME || die
 
 FILE=$(losetup $LOOP | awk {'print $3'} | sed "s/^(//" | sed "s/)$//")
 msg_status "Unmounting container file (\"$FILE\")..."
-losetup -d $LOOP
+losetup -d $LOOP || die
 
 MOUNT_SSHFS=$(stat -c "%m" $FILE)
 if [ "$(findmnt $MOUNT_SSHFS -n -o FSTYPE)" == "fuse.sshfs" ]
@@ -35,7 +35,7 @@ then
 
 	msg_status "Unmounting sshfs (\"$MOUNT_SSHFS\")..."
 	sync
-	umount $MOUNT_SSHFS
+	umount $MOUNT_SSHFS || die
 fi
 
 msg_status "Done."
