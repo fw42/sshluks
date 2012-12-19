@@ -1,8 +1,18 @@
 sshluks
 =======
 
+Small collection of shell scripts used for creating, enlarging, shrinking, mounting,
+and unmounting of crypto containers on sshfs remote storage.
+
+Tools used: cryptsetup/LUKS for encryption, losetup for device mapping, sshfs for network access.
+
+Important: `mount_via_ssh.sh` implements locking, such that no two clients will ever access the container
+file at the same time. Ignoring those locks can result in serious damage to the filesystem inside the container!
+
 Getting started
 ---------------
+
+* Have a look at config.sh
 
 * Create directory for storing the container file on the remote host
 
