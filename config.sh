@@ -13,7 +13,8 @@ LUKSFORMAT="-c aes-cbc-essiv:sha256 luksFormat"
 # Filesystem stuff
 MKFS="mkfs.ext4 -m 0"
 RESIZEFS="resize2fs -p"
-FSCK="fsck.ext4 -f"
+FSCK="fsck.ext4"
+FSCK_FORCE="$FSCK -f"
 MOUNT="mount -t ext4 -o noatime,nodiratime,noacl,commit=1,errors=remount-ro"
 
 # SSHFS options

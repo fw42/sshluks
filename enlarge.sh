@@ -32,13 +32,13 @@ msg_status "Resizing crypto container..."
 cryptsetup resize $CRYPTNAME || die
 
 msg_status "Checking filesystem for errors..."
-$FSCK $MAPPER/$CRYPTNAME || die
+$FSCK_FORCE $MAPPER/$CRYPTNAME || die
 
 msg_status "Resizing filesystem ($RESIZEFS)..."
 $RESIZEFS $MAPPER/$CRYPTNAME || die
 
 msg_status "Checking filesystem for errors again..."
-$FSCK $MAPPER/$CRYPTNAME || die
+$FSCK_FORCE $MAPPER/$CRYPTNAME || die
 
 msg_status "Closing crypto container..."
 cryptsetup luksClose $CRYPTNAME || die

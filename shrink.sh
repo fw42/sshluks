@@ -27,13 +27,13 @@ msg_status "Mounting crypto container as \"$MAPPER/$CRYPTNAME\"..."
 cryptsetup luksOpen $LOOP $CRYPTNAME || die
 
 msg_status "Checking filesystem for errors..."
-$FSCK $MAPPER/$CRYPTNAME || die
+$FSCK_FORCE $MAPPER/$CRYPTNAME || die
 
 msg_status "Resizing filesystem ($RESIZEFS)..."
 $RESIZEFS $MAPPER/$CRYPTNAME "${SIZE}M" || die
 
 msg_status "Checking filesystem for errors again..."
-$FSCK $MAPPER/$CRYPTNAME || die
+$FSCK_FORCE $MAPPER/$CRYPTNAME || die
 
 # Probably wrong!
 msg_status "Resizing crypto container..."
