@@ -14,7 +14,7 @@ die(){
 	else
 		msg_error $*
 	fi
-	exit
+	exit -1
 }
 
 checkroot(){
