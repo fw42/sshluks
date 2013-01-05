@@ -15,7 +15,7 @@ MKFS="mkfs.ext4 -m 0"
 RESIZEFS="resize2fs -p"
 FSCK="fsck.ext4"
 FSCK_FORCE="$FSCK -f"
-MOUNT="mount -t ext4 -o noatime,nodiratime,noacl,commit=1,errors=remount-ro"
+MOUNT="mount -t ext4 -o noatime,nodiratime,commit=1,errors=remount-ro"
 
 # SSHFS options
 SSHFS="sshfs -o uid=$(id -u $LOCALUSER),reconnect,allow_root"
